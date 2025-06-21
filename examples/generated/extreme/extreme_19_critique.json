@@ -1,0 +1,11 @@
+{
+  "example": "EXAMPLE 2",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 9,
+  "main_features": [
+    "views",
+    "circular dependencies",
+    "triggers"
+  ]
+}

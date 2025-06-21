@@ -1,0 +1,10 @@
+{
+  "example": 4,
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 6,
+  "main_features": [
+    "primary keys",
+    "data types"
+  ]
+}

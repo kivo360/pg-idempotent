@@ -1,0 +1,10 @@
+{
+  "example": "Example 8: Create a table with a primary key",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 6,
+  "main_features": [
+    "table creation",
+    "primary key"
+  ]
+}

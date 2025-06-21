@@ -1,0 +1,9 @@
+{
+  "example": "EXAMPLE 6",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 4,
+  "main_features": [
+    "full-text search index"
+  ]
+}

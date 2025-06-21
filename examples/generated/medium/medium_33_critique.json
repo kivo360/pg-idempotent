@@ -1,0 +1,10 @@
+{
+  "example": 3,
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 4,
+  "main_features": [
+    "custom type",
+    "composite type"
+  ]
+}

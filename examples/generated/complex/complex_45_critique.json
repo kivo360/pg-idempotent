@@ -1,0 +1,10 @@
+{
+  "example": 6,
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 9,
+  "main_features": [
+    "complex RLS policy",
+    "recursive CTE"
+  ]
+}

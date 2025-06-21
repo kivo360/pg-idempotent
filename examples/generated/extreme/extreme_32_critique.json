@@ -1,0 +1,12 @@
+{
+  "example": "EXAMPLE 5",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 7,
+  "main_features": [
+    "window functions",
+    "ROW_NUMBER",
+    "RANK",
+    "DENSE_RANK"
+  ]
+}

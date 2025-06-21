@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 4",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 5,
+  "main_features": [
+    "lateral join",
+    "JSONB"
+  ]
+}

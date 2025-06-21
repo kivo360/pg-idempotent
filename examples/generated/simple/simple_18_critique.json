@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 8",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 5,
+  "main_features": [
+    "CREATE TABLE",
+    "PRIMARY KEY"
+  ]
+}

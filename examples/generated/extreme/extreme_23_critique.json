@@ -1,0 +1,11 @@
+{
+  "example": "EXAMPLE 6",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 8,
+  "main_features": [
+    "full-text search",
+    "trigrams",
+    "triggers"
+  ]
+}

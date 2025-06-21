@@ -1,0 +1,11 @@
+{
+  "example": "Example 4: Full-Text Search",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 7,
+  "main_features": [
+    "full-text search",
+    "TSVECTOR",
+    "TSQUERY"
+  ]
+}

@@ -1,0 +1,13 @@
+_commit: 000e2d6
+_src_path: gh:kivo360/faststrate
+author_email: kah.kevin.hill@gmail.com
+author_name: Kevin Hill
+project_description: Fixes the Idempotent issues of a sql file or folder full of files.
+project_name: PG Idempotent
+project_type: package
+project_url: https://github.com/kivo360/pg-idempotent
+python_version: '3.10'
+typing: optional
+with_conventional_commits: true
+with_rust_extensions: false
+with_typer_cli: true

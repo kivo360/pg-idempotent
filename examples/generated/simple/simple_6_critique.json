@@ -1,0 +1,10 @@
+{
+  "example": "Example 6: Create Table with Enum",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 8,
+  "main_features": [
+    "enum type",
+    "enum column"
+  ]
+}

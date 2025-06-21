@@ -1,0 +1,12 @@
+{
+  "total": 10,
+  "config": "performance",
+  "batch_size": 2,
+  "by_complexity": {
+    "simple": 2,
+    "medium": 3,
+    "complex": 3,
+    "extreme": 2
+  },
+  "features_used": {}
+}

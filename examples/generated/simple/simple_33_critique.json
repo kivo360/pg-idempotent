@@ -1,0 +1,7 @@
+{
+  "example": 3,
+  "is_valid": false,
+  "is_non_idempotent": false,
+  "complexity_score": 0,
+  "main_features": []
+}

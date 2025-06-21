@@ -1,0 +1,11 @@
+{
+  "example": "Example 9: Dollar-Quoted Function and Custom Aggregate",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 9,
+  "main_features": [
+    "dollar-quoted functions",
+    "custom aggregates",
+    "PL/pgSQL"
+  ]
+}

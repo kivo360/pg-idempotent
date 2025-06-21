@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 9",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 6,
+  "main_features": [
+    "dynamic SQL",
+    "plpgsql"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "example": 8,
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 8,
+  "main_features": [
+    "trigger functions",
+    "conditional statements"
+  ]
+}

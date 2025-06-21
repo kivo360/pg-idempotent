@@ -1,0 +1,10 @@
+{
+  "example": "Example 4: Create Table with Foreign Key",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 7,
+  "main_features": [
+    "foreign key",
+    "referential integrity"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "example": "Dollar-Quoted String",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 5,
+  "main_features": [
+    "dollar-quoted strings"
+  ]
+}

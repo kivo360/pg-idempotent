@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 7",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 7,
+  "main_features": [
+    "advanced aggregate functions",
+    "triggers"
+  ]
+}

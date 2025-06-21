@@ -1,0 +1,11 @@
+{
+  "example": "Example 5: Window Function",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 8,
+  "main_features": [
+    "window functions",
+    "SUM",
+    "PARTITION BY"
+  ]
+}

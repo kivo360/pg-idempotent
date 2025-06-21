@@ -1,0 +1,11 @@
+{
+  "example": "Example 1: Trigger Function",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 8,
+  "main_features": [
+    "triggers",
+    "functions",
+    "PL/pgSQL"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "example": "Example 7: Custom Type and Function",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 8,
+  "main_features": [
+    "custom types",
+    "functions",
+    "PL/pgSQL"
+  ]
+}

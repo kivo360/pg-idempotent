@@ -1,0 +1,11 @@
+{
+  "example": "Example 8",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 9,
+  "main_features": [
+    "recursive CTEs",
+    "RLS",
+    "functions with DO blocks"
+  ]
+}

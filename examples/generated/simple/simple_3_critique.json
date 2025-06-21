@@ -1,0 +1,9 @@
+{
+  "example": "Example 3: Add Check Constraint",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 5,
+  "main_features": [
+    "check constraint"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 10",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 9,
+  "main_features": [
+    "circular dependencies",
+    "foreign keys"
+  ]
+}

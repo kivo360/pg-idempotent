@@ -1,0 +1,11 @@
+{
+  "example": "EXAMPLE 7",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 8,
+  "main_features": [
+    "deeply nested structures",
+    "JSONB",
+    "plpgsql"
+  ]
+}

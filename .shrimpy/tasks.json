@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "project": "PostgreSQL Idempotent Migration Tool",
+    "tasks": [
+        {
+            "id": "39a6fe92-0833-471e-9c19-9138166b718f",
+            "name": "Create PostgreSQL AST parser integration",
+            "status": "pending",
+            "description": "Integrate pglast parser with error handling"
+        },
+        {
+            "id": "ec928917-b3ba-41c6-8805-4f7820db92ce",
+            "name": "Implement dollar-quote preprocessor",
+            "status": "pending",
+            "description": "Handle PostgreSQL dollar-quoted strings"
+        }
+    ]
+}

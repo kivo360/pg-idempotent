@@ -1,0 +1,11 @@
+{
+  "example": 5,
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 8,
+  "main_features": [
+    "nested dollar quote",
+    "DO block",
+    "trigger"
+  ]
+}

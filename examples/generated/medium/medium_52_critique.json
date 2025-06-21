@@ -1,0 +1,10 @@
+{
+  "example": "Example 2: Row-Level Security (RLS)",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 6,
+  "main_features": [
+    "RLS",
+    "policies"
+  ]
+}

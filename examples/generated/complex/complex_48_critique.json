@@ -1,0 +1,10 @@
+{
+  "example": 9,
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 5,
+  "main_features": [
+    "check constraints",
+    "insert statements"
+  ]
+}

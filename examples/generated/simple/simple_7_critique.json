@@ -1,0 +1,9 @@
+{
+  "example": "Example 7: Add Default Value",
+  "is_valid": true,
+  "is_non_idempotent": false,
+  "complexity_score": 3,
+  "main_features": [
+    "default value"
+  ]
+}

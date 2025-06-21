@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 3",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 6,
+  "main_features": [
+    "recursive CTE",
+    "window functions"
+  ]
+}

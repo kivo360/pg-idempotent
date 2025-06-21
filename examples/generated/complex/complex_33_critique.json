@@ -1,0 +1,10 @@
+{
+  "example": "EXAMPLE 3",
+  "is_valid": true,
+  "is_non_idempotent": true,
+  "complexity_score": 7,
+  "main_features": [
+    "triggers",
+    "unique constraints"
+  ]
+}

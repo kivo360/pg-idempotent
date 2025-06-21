@@ -1,0 +1,10 @@
+{
+  "example": 3,
+  "is_valid": false,
+  "is_non_idempotent": true,
+  "complexity_score": 9,
+  "main_features": [
+    "polymorphic functions",
+    "circular dependencies"
+  ]
+}
