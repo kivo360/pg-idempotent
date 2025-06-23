@@ -1,246 +1,181 @@
-# Claude Code Configuration
+# CLAUDE.md
 
-## Build Commands
-- `npm run build`: Build the project
-- `npm run test`: Run the full test suite
-- `npm run lint`: Run ESLint and format checks
-- `npm run typecheck`: Run TypeScript type checking
-- `./claude-flow --help`: Show all available commands
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Claude-Flow Complete Command Reference
+## Common Development Commands
 
-### Core System Commands
-- `./claude-flow start [--ui] [--port 3000] [--host localhost]`: Start orchestration system with optional web UI
-- `./claude-flow status`: Show comprehensive system status
-- `./claude-flow monitor`: Real-time system monitoring dashboard
-- `./claude-flow config <subcommand>`: Configuration management (show, get, set, init, validate)
+### Build and Development
 
-### Agent Management
-- `./claude-flow agent spawn <type> [--name <name>]`: Create AI agents (researcher, coder, analyst, etc.)
-- `./claude-flow agent list`: List all active agents
-- `./claude-flow spawn <type>`: Quick agent spawning (alias for agent spawn)
-
-### Task Orchestration
-- `./claude-flow task create <type> [description]`: Create and manage tasks
-- `./claude-flow task list`: View active task queue
-- `./claude-flow workflow <file>`: Execute workflow automation files
-
-### Memory Management
-- `./claude-flow memory store <key> <data>`: Store persistent data across sessions
-- `./claude-flow memory get <key>`: Retrieve stored information
-- `./claude-flow memory list`: List all memory keys
-- `./claude-flow memory export <file>`: Export memory to file
-- `./claude-flow memory import <file>`: Import memory from file
-- `./claude-flow memory stats`: Memory usage statistics
-- `./claude-flow memory cleanup`: Clean unused memory entries
-
-### SPARC Development Modes
-- `./claude-flow sparc "<task>"`: Run orchestrator mode (default)
-- `./claude-flow sparc run <mode> "<task>"`: Run specific SPARC mode
-- `./claude-flow sparc tdd "<feature>"`: Test-driven development mode
-- `./claude-flow sparc modes`: List all 17 available SPARC modes
-
-Available SPARC modes: orchestrator, coder, researcher, tdd, architect, reviewer, debugger, tester, analyzer, optimizer, documenter, designer, innovator, swarm-coordinator, memory-manager, batch-executor, workflow-manager
-
-### Swarm Coordination
-- `./claude-flow swarm "<objective>" [options]`: Multi-agent swarm coordination
-- `--strategy`: research, development, analysis, testing, optimization, maintenance
-- `--mode`: centralized, distributed, hierarchical, mesh, hybrid
-- `--max-agents <n>`: Maximum number of agents (default: 5)
-- `--parallel`: Enable parallel execution
-- `--monitor`: Real-time monitoring
-- `--output <format>`: json, sqlite, csv, html
-
-### MCP Server Integration
-- `./claude-flow mcp start [--port 3000] [--host localhost]`: Start MCP server
-- `./claude-flow mcp status`: Show MCP server status
-- `./claude-flow mcp tools`: List available MCP tools
-
-### Claude Integration
-- `./claude-flow claude auth`: Authenticate with Claude API
-- `./claude-flow claude models`: List available Claude models
-- `./claude-flow claude chat`: Interactive chat mode
-
-### Session Management
-- `./claude-flow session`: Manage terminal sessions
-- `./claude-flow repl`: Start interactive REPL mode
-
-### Enterprise Features
-- `./claude-flow project <subcommand>`: Project management (Enterprise)
-- `./claude-flow deploy <subcommand>`: Deployment operations (Enterprise)
-- `./claude-flow cloud <subcommand>`: Cloud infrastructure management (Enterprise)
-- `./claude-flow security <subcommand>`: Security and compliance tools (Enterprise)
-- `./claude-flow analytics <subcommand>`: Analytics and insights (Enterprise)
-
-### Project Initialization
-- `./claude-flow init`: Initialize Claude-Flow project
-- `./claude-flow init --sparc`: Initialize with full SPARC development environment
-
-## Quick Start Workflows
-
-### Research Workflow
 ```bash
-# Start a research swarm with distributed coordination
-./claude-flow swarm "Research modern web frameworks" --strategy research --mode distributed --parallel --monitor
+# Quick start - set up everything and run first test
+just quickstart
 
-# Or use SPARC researcher mode for focused research
-./claude-flow sparc run researcher "Analyze React vs Vue vs Angular performance characteristics"
+# Install dependencies and set up development environment
+just install
 
-# Store findings in memory for later use
-./claude-flow memory store "research_findings" "Key insights from framework analysis"
+# Transform a SQL file to idempotent version
+just transform examples/simple.sql
+just transform input.sql output.sql
+
+# Run the CLI directly
+just run transform -i input.sql -o output.sql
+
+# Watch files and auto-transform
+just watch examples/
+just watch-sql examples/
 ```
+
+### Testing and Quality
+
+```bash
+# Run tests
+just test
+
+# Run tests with coverage
+just test-cov
+
+# Lint and format code (runs ruff + mypy)
+just lint
+
+# Type checking only
+just typecheck
+
+# Run pre-commit hooks
+just hooks
+```
+
+### SQL Test Generation
+
+```bash
+# Generate SQL test cases using Fireworks AI
+just generate-tests 100 balanced
+just generate-tests-fast 100 balanced  # Parallel generation
+
+# Benchmark optimal generation settings
+just benchmark-generation
+
+# Check available Fireworks AI models
+just check-models
+```
+
+### Release Management
+
+```bash
+# Create a new release (uses commitizen)
+just release patch  # or minor, major
+
+# Build package
+just build
+
+# Publish to PyPI
+just publish
+
+# Publish to TestPyPI
+just publish-test
+```
+
+## High-Level Architecture
+
+### Core Components
+
+1. **CLI Application** (`src/pg_idempotent/cli.py`)
+   - Typer-based CLI with commands: `transform`, `check`, `preview`, `batch`
+   - Rich terminal UI with progress indicators
+   - Supports dry-run mode and verbose output
+
+2. **SQL Parser** (`src/pg_idempotent/parser/`)
+   - `PostgreSQLParser`: Uses pglast to parse SQL into AST
+   - Handles PostgreSQL-specific syntax
+   - Validates SQL syntax before transformation
+
+3. **SQL Transformer** (`src/pg_idempotent/transformer/`)
+   - `SQLTransformer`: Main transformation engine
+   - `StatementTransformer`: Handles individual SQL statement transformations
+   - `templates.py`: Contains SQL templates for idempotent patterns
+   - Transforms various SQL statements to be safely re-runnable
+
+4. **Utilities** (`src/pg_idempotent/utils/`)
+   - File handling utilities for reading/writing SQL files
+   - Path resolution and validation
+
+### Transformation Patterns
+
+The tool transforms SQL statements to be idempotent using patterns like:
+- `CREATE TABLE` → `CREATE TABLE IF NOT EXISTS`
+- `CREATE INDEX` → `CREATE INDEX IF NOT EXISTS`
+- `ALTER TABLE ADD COLUMN` → Wrapped with existence checks
+- `CREATE TYPE` → Wrapped with conditional logic
+- `INSERT` → Can add `ON CONFLICT` clauses
+
+### Testing Structure
+
+- **Unit Tests**: Test individual components (parser, transformer)
+- **Integration Tests**: Test full transformation pipeline
+- **Generated Test Cases**: Located in `examples/generated/` with varying complexity:
+  - `simple/`: Basic SQL statements
+  - `medium/`: Moderate complexity
+  - `complex/`: Advanced SQL features
+  - `extreme/`: Edge cases and stress tests
 
 ### Development Workflow
-```bash
-# Start orchestration system with web UI
-./claude-flow start --ui --port 3000
 
-# Run TDD workflow for new feature
-./claude-flow sparc tdd "User authentication system with JWT tokens"
+1. The project uses modern Python tooling:
+   - **UV** for fast dependency management (preferred)
+   - **Ruff** for linting and formatting (replaces black, isort, flake8)
+   - **MyPy** for type checking
+   - **Pytest** for testing with coverage
+   - **Pre-commit** hooks for code quality
 
-# Development swarm for complex projects
-./claude-flow swarm "Build e-commerce API with payment integration" --strategy development --mode hierarchical --max-agents 8 --monitor
+2. Conventional commits are enforced:
+   - `feat:` for new features
+   - `fix:` for bug fixes
+   - `docs:` for documentation
+   - `test:` for tests
+   - `refactor:` for code improvements
 
-# Check system status
-./claude-flow status
-```
+3. CI/CD via GitHub Actions:
+   - Tests run on push/PR
+   - Automatic PyPI publishing on tagged releases
 
-### Analysis Workflow
-```bash
-# Analyze codebase performance
-./claude-flow sparc run analyzer "Identify performance bottlenecks in current codebase"
+### Key Design Decisions
 
-# Data analysis swarm
-./claude-flow swarm "Analyze user behavior patterns from logs" --strategy analysis --mode mesh --parallel --output sqlite
+1. **AST-based transformation**: Uses pglast to parse SQL into AST for reliable transformations
+2. **Template-based patterns**: Transformation templates are centralized in `templates.py`
+3. **Streaming processing**: Supports batch processing of multiple files
+4. **Rich CLI experience**: Uses Rich library for enhanced terminal output
+5. **Extensible architecture**: Easy to add new transformation patterns
 
-# Store analysis results
-./claude-flow memory store "performance_analysis" "Bottlenecks identified in database queries"
-```
+### Environment Requirements
 
-### Maintenance Workflow
-```bash
-# System maintenance with safety controls
-./claude-flow swarm "Update dependencies and security patches" --strategy maintenance --mode centralized --monitor
+- Python 3.10+ required
+- PostgreSQL knowledge assumed (tool is PostgreSQL-specific)
+- Fireworks AI API key needed for test generation features
 
-# Security review
-./claude-flow sparc run reviewer "Security audit of authentication system"
+## Test Suite Status
 
-# Export maintenance logs
-./claude-flow memory export maintenance_log.json
-```
+### Core Tests (91/91 passing - 100%)
+- **Parser Tests**: 30 tests covering dollar-quote handling, statement classification, and parsing
+- **Transformer Tests**: 12 tests for SQL transformation logic
+- **CLI Tests**: 30 tests for all CLI commands and workflows
+- **File Utils Tests**: 20 tests for file operations
 
-## Integration Patterns
+### Integration Tests (6/13 passing - 46%)
+- 7 tests failing due to implementation differences:
+  - Transformer uses `$IDEMPOTENT$` tags instead of `$$`
+  - Different transformation counts than expected
+  - Validation method returns different structure
 
-### Memory-Driven Coordination
-Use Memory to coordinate information across multiple SPARC modes and swarm operations:
+### Advanced Feature Tests
+- **LLM Namer**: Tests written but module needs `openai` dependency
+- **Schema Splitter**: Tests require `rustworkx` dependency (optional)
+- **Migra Validator**: Tests require `sqlalchemy` and `migra` dependencies
+- **Plugin System**: Basic implementation complete
 
-```bash
-# Store architecture decisions
-./claude-flow memory store "system_architecture" "Microservices with API Gateway pattern"
+### Dependencies
+Required:
+- `typer[all]`, `pglast`, `rich`, `aiohttp`, `fireworks-ai`, `requests`
 
-# All subsequent operations can reference this decision
-./claude-flow sparc run coder "Implement user service based on system_architecture in memory"
-./claude-flow sparc run tester "Create integration tests for microservices architecture"
-```
-
-### Multi-Stage Development
-Coordinate complex development through staged execution:
-
-```bash
-# Stage 1: Research and planning
-./claude-flow sparc run researcher "Research authentication best practices"
-./claude-flow sparc run architect "Design authentication system architecture"
-
-# Stage 2: Implementation
-./claude-flow sparc tdd "User registration and login functionality"
-./claude-flow sparc run coder "Implement JWT token management"
-
-# Stage 3: Testing and deployment
-./claude-flow sparc run tester "Comprehensive security testing"
-./claude-flow swarm "Deploy authentication system" --strategy maintenance --mode centralized
-```
-
-### Enterprise Integration
-For enterprise environments with additional tooling:
-
-```bash
-# Project management integration
-./claude-flow project create "authentication-system"
-./claude-flow project switch "authentication-system"
-
-# Security compliance
-./claude-flow security scan
-./claude-flow security audit
-
-# Analytics and monitoring
-./claude-flow analytics dashboard
-./claude-flow deploy production --monitor
-```
-
-## Advanced Batch Tool Patterns
-
-### TodoWrite Coordination
-Always use TodoWrite for complex task coordination:
-
-```javascript
-TodoWrite([
-  {
-    id: "architecture_design",
-    content: "Design system architecture and component interfaces",
-    status: "pending",
-    priority: "high",
-    dependencies: [],
-    estimatedTime: "60min",
-    assignedAgent: "architect"
-  },
-  {
-    id: "frontend_development", 
-    content: "Develop React components and user interface",
-    status: "pending",
-    priority: "medium",
-    dependencies: ["architecture_design"],
-    estimatedTime: "120min",
-    assignedAgent: "frontend_team"
-  }
-]);
-```
-
-### Task and Memory Integration
-Launch coordinated agents with shared memory:
-
-```javascript
-// Store architecture in memory
-Task("System Architect", "Design architecture and store specs in Memory");
-
-// Other agents use memory for coordination
-Task("Frontend Team", "Develop UI using Memory architecture specs");
-Task("Backend Team", "Implement APIs according to Memory specifications");
-```
-
-## Code Style Preferences
-- Use ES modules (import/export) syntax
-- Destructure imports when possible
-- Use TypeScript for all new code
-- Follow existing naming conventions
-- Add JSDoc comments for public APIs
-- Use async/await instead of Promise chains
-- Prefer const/let over var
-
-## Workflow Guidelines
-- Always run typecheck after making code changes
-- Run tests before committing changes
-- Use meaningful commit messages
-- Create feature branches for new functionality
-- Ensure all tests pass before merging
-
-## Important Notes
-- **Use TodoWrite extensively** for all complex task coordination
-- **Leverage Task tool** for parallel agent execution on independent work
-- **Store all important information in Memory** for cross-agent coordination
-- **Use batch file operations** whenever reading/writing multiple files
-- **Check .claude/commands/** for detailed command documentation
-- **All swarm operations include automatic batch tool coordination**
-- **Monitor progress** with TodoRead during long-running operations
-- **Enable parallel execution** with --parallel flags for maximum efficiency
-
-This configuration ensures optimal use of Claude Code's batch tools for swarm orchestration and parallel task execution with full Claude-Flow capabilities.
+Optional (for advanced features):
+- `openai` - for LLM-based schema naming
+- `rustworkx` - for dependency graph analysis
+- `migra`, `sqlalchemy` - for schema validation
