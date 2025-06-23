@@ -9,7 +9,8 @@ from typer.testing import CliRunner
 from pg_idempotent.plugins.base import (
     Plugin, TransformerPlugin, AnalyzerPlugin, OutputPlugin
 )
-from pg_idempotent.plugins.loader import PluginLoader, PluginRegistry
+from pg_idempotent.plugins.loader import PluginLoader
+from pg_idempotent.plugins.base import registry as PluginRegistry
 from pg_idempotent.parser.parser import ParsedStatement
 from pg_idempotent.analyzer.rustworkx_analyzer import SQLObject
 

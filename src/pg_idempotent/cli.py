@@ -180,7 +180,8 @@ def preview(
     console.print(panel)
     
     if len(result.transformed_sql.split('\n')) > lines:
-        rprint(f"\n[dim]... and {len(result.transformed_sql.split('\n')) - lines} more lines[/dim]")
+        total_lines = len(result.transformed_sql.split('\n'))
+        rprint(f"\n[dim]... and {total_lines - lines} more lines[/dim]")
 
 
 @app.command()
